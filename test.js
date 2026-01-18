@@ -19,6 +19,10 @@ function test(description, fn) {
   }
 }
 
+/**
+ * Assert that two values are equal (strict equality for primitives)
+ * Note: This uses strict equality (===) and is suitable for primitive values only
+ */
 function assertEquals(actual, expected, message) {
   if (actual !== expected) {
     throw new Error(message || `Expected ${expected}, but got ${actual}`);
