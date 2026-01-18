@@ -13,12 +13,19 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  // Potential issue: no check for division by zero
+  if (b === 0) {
+    throw new Error('Cannot divide by zero');
+  }
   return a / b;
 }
 
 function calculateArea(length, width) {
-  // This function could use better input validation
+  if (typeof length !== 'number' || typeof width !== 'number') {
+    throw new Error('Length and width must be numbers');
+  }
+  if (length < 0 || width < 0) {
+    throw new Error('Length and width must be positive numbers');
+  }
   return length * width;
 }
 

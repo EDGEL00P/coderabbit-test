@@ -6,49 +6,60 @@ function runTests() {
   let passed = 0;
   let failed = 0;
 
-  // Test addition
-  if (calculator.add(2, 3) === 5) {
-    console.log('✓ Addition test passed');
-    passed++;
-  } else {
-    console.log('✗ Addition test failed');
-    failed++;
+  // Helper function to run individual tests
+  function runTest(name, actual, expected) {
+    if (actual === expected) {
+      console.log(`✓ ${name} test passed`);
+      passed++;
+    } else {
+      console.log(`✗ ${name} test failed: expected ${expected}, got ${actual}`);
+      failed++;
+    }
   }
+
+  // Test addition
+  runTest('Addition', calculator.add(2, 3), 5);
 
   // Test subtraction
-  if (calculator.subtract(10, 4) === 6) {
-    console.log('✓ Subtraction test passed');
-    passed++;
-  } else {
-    console.log('✗ Subtraction test failed');
-    failed++;
-  }
+  runTest('Subtraction', calculator.subtract(10, 4), 6);
 
   // Test multiplication
-  if (calculator.multiply(3, 4) === 12) {
-    console.log('✓ Multiplication test passed');
-    passed++;
-  } else {
-    console.log('✗ Multiplication test failed');
-    failed++;
-  }
+  runTest('Multiplication', calculator.multiply(3, 4), 12);
 
   // Test division
-  if (calculator.divide(20, 4) === 5) {
-    console.log('✓ Division test passed');
-    passed++;
-  } else {
-    console.log('✗ Division test failed');
-    failed++;
-  }
+  runTest('Division', calculator.divide(20, 4), 5);
 
   // Test area calculation
-  if (calculator.calculateArea(5, 10) === 50) {
-    console.log('✓ Area calculation test passed');
-    passed++;
-  } else {
-    console.log('✗ Area calculation test failed');
+  runTest('Area calculation', calculator.calculateArea(5, 10), 50);
+
+  // Test division by zero error handling
+  try {
+    calculator.divide(10, 0);
+    console.log('✗ Division by zero test failed: expected error to be thrown');
     failed++;
+  } catch (error) {
+    if (error.message === 'Cannot divide by zero') {
+      console.log('✓ Division by zero test passed');
+      passed++;
+    } else {
+      console.log('✗ Division by zero test failed: unexpected error message');
+      failed++;
+    }
+  }
+
+  // Test negative area input validation
+  try {
+    calculator.calculateArea(-5, 10);
+    console.log('✗ Negative area input test failed: expected error to be thrown');
+    failed++;
+  } catch (error) {
+    if (error.message === 'Length and width must be positive numbers') {
+      console.log('✓ Negative area input test passed');
+      passed++;
+    } else {
+      console.log('✗ Negative area input test failed: unexpected error message');
+      failed++;
+    }
   }
 
   console.log(`\nResults: ${passed} passed, ${failed} failed`);
