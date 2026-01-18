@@ -1,0 +1,13 @@
+{
+  "name": "coderabbit-test",
+  "version": "1.0.0",
+  "description": "A test repository for CodeRabbit integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node index.js"
+  },
+  "keywords": ["test", "coderabbit"],
+  "author": "",
+  "license": "MIT"
+}
