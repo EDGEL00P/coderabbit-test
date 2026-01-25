@@ -1,72 +1,62 @@
-// Simple test file for the calculator functions
+/**
+ * Simple test suite for coderabbit-test
+ */
 
-const calculator = require('./index.js');
+const { greet, add, multiply } = require('./index.js');
 
-function runTests() {
-  let passed = 0;
-  let failed = 0;
+let passed = 0;
+let failed = 0;
 
-  // Helper function to run individual tests
-  function runTest(name, actual, expected) {
-    if (actual === expected) {
-      console.log(`✓ ${name} test passed`);
-      passed++;
-    } else {
-      console.log(`✗ ${name} test failed: expected ${expected}, got ${actual}`);
-      failed++;
-    }
-  }
-
-  // Test addition
-  runTest('Addition', calculator.add(2, 3), 5);
-
-  // Test subtraction
-  runTest('Subtraction', calculator.subtract(10, 4), 6);
-
-  // Test multiplication
-  runTest('Multiplication', calculator.multiply(3, 4), 12);
-
-  // Test division
-  runTest('Division', calculator.divide(20, 4), 5);
-
-  // Test area calculation
-  runTest('Area calculation', calculator.calculateArea(5, 10), 50);
-
-  // Test division by zero error handling
+function test(description, fn) {
   try {
-    calculator.divide(10, 0);
-    console.log('✗ Division by zero test failed: expected error to be thrown');
-    failed++;
+    fn();
+    console.log(`✓ ${description}`);
+    passed++;
   } catch (error) {
-    if (error.message === 'Cannot divide by zero') {
-      console.log('✓ Division by zero test passed');
-      passed++;
-    } else {
-      console.log('✗ Division by zero test failed: unexpected error message');
-      failed++;
-    }
-  }
-
-  // Test negative area input validation
-  try {
-    calculator.calculateArea(-5, 10);
-    console.log('✗ Negative area input test failed: expected error to be thrown');
+    console.log(`✗ ${description}`);
+    console.log(`  ${error.message}`);
     failed++;
-  } catch (error) {
-    if (error.message === 'Length and width must be positive numbers') {
-      console.log('✓ Negative area input test passed');
-      passed++;
-    } else {
-      console.log('✗ Negative area input test failed: unexpected error message');
-      failed++;
-    }
-  }
-
-  console.log(`\nResults: ${passed} passed, ${failed} failed`);
-  
-  if (failed > 0) {
-    process.exit(1);
   }
 }
 
-runTests();
+/**
+ * Assert that two values are equal (strict equality for primitives)
+ * Note: This uses strict equality (===) and is suitable for primitive values only
+ */
+function assertEquals(actual, expected, message) {
+  if (actual !== expected) {
+    throw new Error(message || `Expected ${expected}, but got ${actual}`);
+  }
+}
+
+// Test cases
+test('greet should return greeting message', () => {
+  const result = greet('World');
+  assertEquals(result, 'Hello, World!');
+});
+
+test('greet should handle empty string', () => {
+  const result = greet('');
+  assertEquals(result, 'Hello, !');
+});
+
+test('add should return sum of two numbers', () => {
+  assertEquals(add(2, 3), 5);
+  assertEquals(add(-1, 1), 0);
+  assertEquals(add(0, 0), 0);
+});
+
+test('multiply should return product of two numbers', () => {
+  assertEquals(multiply(2, 3), 6);
+  assertEquals(multiply(-2, 3), -6);
+  assertEquals(multiply(0, 5), 0);
+});
+
+// Print summary
+console.log('\n' + '='.repeat(40));
+console.log(`Tests: ${passed} passed, ${failed} failed`);
+console.log('='.repeat(40));
+
+if (failed > 0) {
+  process.exit(1);
+}

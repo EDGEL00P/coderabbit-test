@@ -1,46 +1,24 @@
-// Simple calculator application for testing CodeRabbit
+/**
+ * Main entry point for coderabbit-test
+ */
+
+function greet(name) {
+  return `Hello, ${name}!`;
+}
 
 function add(a, b) {
   return a + b;
-}
-
-function subtract(a, b) {
-  return a - b;
 }
 
 function multiply(a, b) {
   return a * b;
 }
 
-function divide(a, b) {
-  if (b === 0) {
-    throw new Error('Cannot divide by zero');
-  }
-  return a / b;
+// Run main function if executed directly
+if (require.main === module) {
+  console.log(greet('CodeRabbit'));
+  console.log('2 + 3 =', add(2, 3));
+  console.log('4 * 5 =', multiply(4, 5));
 }
 
-function calculateArea(length, width) {
-  if (typeof length !== 'number' || typeof width !== 'number') {
-    throw new Error('Length and width must be numbers');
-  }
-  if (length < 0 || width < 0) {
-    throw new Error('Length and width must be positive numbers');
-  }
-  return length * width;
-}
-
-// Example usage
-console.log('Addition: 5 + 3 =', add(5, 3));
-console.log('Subtraction: 10 - 4 =', subtract(10, 4));
-console.log('Multiplication: 6 * 7 =', multiply(6, 7));
-console.log('Division: 20 / 4 =', divide(20, 4));
-console.log('Area: 5 x 10 =', calculateArea(5, 10));
-
-// Export functions for testing
-module.exports = {
-  add,
-  subtract,
-  multiply,
-  divide,
-  calculateArea
-};
+module.exports = { greet, add, multiply };

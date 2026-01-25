@@ -1,20 +1,25 @@
 # coderabbit-test
 
-A simple test repository for demonstrating CodeRabbit functionality.
+A simple test repository for CodeRabbit integration testing.
 
-## Overview
+## Description
 
-This repository contains a basic Node.js calculator application designed to test CodeRabbit's code review capabilities.
+This repository contains a basic Node.js application with simple mathematical functions and a testing framework.
 
 ## Features
 
-- Basic arithmetic operations (add, subtract, multiply, divide)
-- Area calculation function
-- Simple test suite
+- Simple greeting function
+- Basic arithmetic operations (add, multiply)
+- Built-in test suite
+- No external dependencies
+
+## Installation
+
+No installation required. This project uses only Node.js built-in modules.
 
 ## Usage
 
-Run the application:
+Run the main application:
 ```bash
 npm start
 ```
@@ -24,15 +29,24 @@ Run tests:
 npm test
 ```
 
-## Purpose
+## Project Structure
 
-This repository is intended to:
-- Test CodeRabbit's code review capabilities
-- Demonstrate automated code analysis
-- Showcase code quality suggestions
+- `index.js` - Main application file with core functions
+- `test.js` - Test suite for the application
+- `package.json` - Project configuration
+- `.gitignore` - Git ignore rules
 
-## Files
+## Functions
 
-- `index.js` - Main calculator application
-- `test.js` - Test suite for calculator functions
-- `package.json` - Node.js package configuration
+### greet(name)
+Returns a greeting message for the given name.
+
+### add(a, b)
+Returns the sum of two numbers.
+
+### multiply(a, b)
+Returns the product of two numbers.
+
+## License
+
+MIT
